@@ -1,0 +1,6 @@
+@HarrisPIMS.API_HostAddress = http://localhost:5157
+
+GET {{HarrisPIMS.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
