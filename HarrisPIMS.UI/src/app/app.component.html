@@ -1,0 +1,53 @@
+<main class="main">
+  <div class="content">
+    <div class="app-header">
+      <h2>Product Inventory Management System</h2>
+    </div>
+
+    @if(products.length > 0) {
+    <div class="add-product-button">
+     <button mat-flat-button>Add Product</button>
+    </div>
+
+    <div>
+      <table mat-table [dataSource]="products" class="mat-elevation-z8">
+        <ng-container matColumnDef="productName">
+          <th mat-header-cell *matHeaderCellDef> Product Name </th>
+          <td mat-cell *matCellDef="let product"> {{product.productName}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="price">
+          <th mat-header-cell *matHeaderCellDef> Price </th>
+          <td mat-cell *matCellDef="let product"> {{product.price}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="quantity">
+          <th mat-header-cell *matHeaderCellDef> Quantity </th>
+          <td mat-cell *matCellDef="let product"> {{product.quantity}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef> </th>
+          <td mat-cell *matCellDef="let product">
+            <button mat-icon-button matTooltip="Edit product"><mat-icon>edit</mat-icon></button>
+            <button mat-icon-button matTooltip="Delete product"><mat-icon>delete_forever</mat-icon></button>
+          </td>
+          <!--<mat-header-cell *matHeaderCellDef></mat-header-cell>-->
+          <!--<mat-cell *matCellDef="let product">
+            <button mat-icon-button><mat-icon>edit</mat-icon></button>
+            <button mat-icon-button color="warn"><mat-icon>delete_forever</mat-icon></button>
+          </mat-cell>-->
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+        <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
+      </table>
+    </div>
+    } @else {
+      <div class="getting-started">
+        <h4>There are no products. To get started, click the Add Product button.</h4>
+        <button mat-flat-button>Add Product</button>
+      </div>
+      }
+  </div>
+</main>

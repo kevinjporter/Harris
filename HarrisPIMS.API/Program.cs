@@ -8,6 +8,17 @@ var connectionString =
         ?? throw new InvalidOperationException("Connection string"
         + "'DefaultConnection' not found.");
 
+var corsName = "AllowWebApiCallsFromAngularFrontEnd";
+
+builder.Services.AddCors(options => {
+    options.AddPolicy(name: corsName, policy =>
+        {
+            policy
+                .WithOrigins("http://localhost:28492")
+                .WithMethods("GET");
+        });
+});
+
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -26,6 +37,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors(corsName);
 
 app.UseAuthorization();
 

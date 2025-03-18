@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35828.75 d17.13
+VisualStudioVersion = 17.13.35828.75
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HarrisPIMS.API", "HarrisPIMS.API\HarrisPIMS.API.csproj", "{ABC00FFC-6384-4DBE-86B4-ABAF3A69012F}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "HarrisPIMS.UI", "HarrisPIMS.UI\HarrisPIMS.UI.esproj", "{75915B6D-AEFA-AC2E-7383-3B4607691FE2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,12 @@ Global
 		{ABC00FFC-6384-4DBE-86B4-ABAF3A69012F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ABC00FFC-6384-4DBE-86B4-ABAF3A69012F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ABC00FFC-6384-4DBE-86B4-ABAF3A69012F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75915B6D-AEFA-AC2E-7383-3B4607691FE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75915B6D-AEFA-AC2E-7383-3B4607691FE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75915B6D-AEFA-AC2E-7383-3B4607691FE2}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{75915B6D-AEFA-AC2E-7383-3B4607691FE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75915B6D-AEFA-AC2E-7383-3B4607691FE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75915B6D-AEFA-AC2E-7383-3B4607691FE2}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
