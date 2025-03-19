@@ -1,0 +1,7 @@
+<mat-dialog-content>
+  Would you like to delete the product '{{data.productName}}'?
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close cdkFocusInitial (click)="deleteProduct()">Yes</button>
+  <button mat-button mat-dialog-close>No</button>
+</mat-dialog-actions>

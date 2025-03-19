@@ -6,9 +6,12 @@ import { provideHttpClient, withFetch } from '@angular/common/http';
 import { ProductFormComponent } from './product-form/product-form.component';
 import { provideRouter } from '@angular/router';
 import { ViewProductsComponent } from './view-products/view-products.component';
+import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 
 @NgModule({
   declarations: [
+  
+    DeleteDialogComponent
   ],
   imports: [
     BrowserModule,

@@ -50,7 +50,7 @@ public class ProductsController : ControllerBase
         //TODO: Check product exists before removal
 
         //TODO: Begin transaction
-        var numberOfDeletedProducts = _dbContext.Database.SqlQuery<int>($"EXEC [dbo].[PIMS_Product_Delete] @ProductID={productId}");
+        _dbContext.Database.ExecuteSql($"EXEC [dbo].[PIMS_Product_Delete] @ProductID={productId}");
 
         // if numberOfDeletedProducts != 1 return BadRequest
         // if BadRequest, rollback transaction
