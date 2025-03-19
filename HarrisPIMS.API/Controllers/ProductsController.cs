@@ -25,10 +25,10 @@ public class ProductsController : ControllerBase
     }
 
     [HttpPost]
-    public IActionResult SaveProduct(string productName, decimal price, int quantity)
+    public IActionResult SaveProduct(Product product)
     {
         //TODO: Validate data before inserting 
-        var newProductId = _dbContext.Database.SqlQuery<int>($"EXEC [dbo].[PIMS_Product_Insert] @ProductName={productName}, @Price={price}, @Quantity={quantity}");
+        var newProductId = _dbContext.Database.SqlQuery<int>($"EXEC [dbo].[PIMS_Product_Insert] @ProductName={product.ProductName}, @Price={product.Price}, @Quantity={product.Quantity}");
 
         // if newProductId <= 0 return BadRequest
         return Ok(newProductId);

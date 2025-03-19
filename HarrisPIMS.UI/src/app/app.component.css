@@ -3,12 +3,6 @@
     padding-right: 16px;
 }
 
-.content mat-card {
-    padding-left: 16px;
-    padding-top: 16px;
-    height: 50px;
-}
-
 .app-header {
   background-color: #498fab;
 }
@@ -18,13 +12,27 @@
   text-align: center;
 }
 
-.getting-started {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #498fab;
 }
 
-.add-product-button {
-    display: flex;
-    justify-content: flex-end;
+li {
+  float: left;
 }
+
+  li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+
+    li a:hover {
+      background-color: #111;
+      cursor: pointer;
+    }
