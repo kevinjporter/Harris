@@ -36,6 +36,7 @@ export class ProductFormComponent implements OnInit {
       quantity: form.value.quantity
     };
 
-    this.http.post('http://localhost:5157/api/Products', this.newProduct).subscribe(response => console.log(response));;
+    this.http.post('http://localhost:5157/api/Products', this.newProduct).subscribe(response =>
+      this.productForm.reset());
   }
 }

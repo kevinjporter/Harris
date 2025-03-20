@@ -9,6 +9,7 @@ import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component'
 import { ProductService } from '../services/productService';
 import { Observable } from 'rxjs/internal/Observable';
 import { switchMap } from 'rxjs/internal/operators/switchMap';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-view-products',
@@ -20,7 +21,8 @@ import { switchMap } from 'rxjs/internal/operators/switchMap';
     MatTableModule,
     MatIconModule,
     MatTooltipModule,
-    MatDialogModule
+    MatDialogModule,
+    AsyncPipe
   ]
 })
 export class ViewProductsComponent {

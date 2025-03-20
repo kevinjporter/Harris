@@ -1,4 +1,7 @@
 .formRow {
-  display: flex;
-  flex-direction: row;
+    padding-bottom: 16px;
+}
+
+.buttonRow button {
+    margin-right: 8px;
 }
