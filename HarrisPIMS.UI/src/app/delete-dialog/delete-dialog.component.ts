@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, EventEmitter, Inject, input, Output } from '@angular/core';
+import { Component, Inject, input } from '@angular/core';
 import { MatDialogActions, MatDialogClose, MatDialogContent, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ProductService } from '../services/productService';
 
 @Component({
   selector: 'app-delete-dialog',
@@ -16,14 +16,12 @@ import { MatDialogActions, MatDialogClose, MatDialogContent, MAT_DIALOG_DATA } f
 export class DeleteDialogComponent {
   selectedProductId: number;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: { productId: number, productName: string }, private http: HttpClient) {
-    this.http = http;
+  constructor(@Inject(MAT_DIALOG_DATA) public data: { productId: number, productName: string }, private productService: ProductService) {
     this.selectedProductId = data.productId;
   }
 
   deleteProduct() {
-    this.http.delete(`http://localhost:5157/api/Products?productId=${this.selectedProductId}`)
-      .subscribe(data => {
-      });
+    this.productService.deleteProduct(this.selectedProductId)
+      .subscribe(e => {});
   }
 }

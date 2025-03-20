@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { Product } from '../../models/product';
 import { MatButtonModule } from '@angular/material/button';
@@ -7,6 +6,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
+import { ProductService } from '../services/productService';
+import { Observable } from 'rxjs/internal/Observable';
+import { switchMap } from 'rxjs/internal/operators/switchMap';
 
 @Component({
   selector: 'app-view-products',
@@ -22,20 +24,16 @@ import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component'
   ]
 })
 export class ViewProductsComponent {
-  products: Product[] = [];
+  products$!: Observable<Product[]>;
   selectedProductId = 0;
   readonly columnsToDisplay = ['productName', 'price', 'quantity', 'actions'];
   readonly dialog = inject(MatDialog);
 
-  constructor(private http: HttpClient) {
-    this.getProductData();
-  }
+  constructor(private productService: ProductService) { }
 
-  getProductData() {
-    this.http.get<Product[]>('http://localhost:5157/api/Products')
-      .subscribe(data => {
-        this.products = data;
-      });
+  ngOnInit(): void {
+    this.products$ = this.productService.refetch.pipe(
+      switchMap(() => this.productService.getProducts()))
   }
 
   openDialog(selectedProductId: number, selectedProductName: string): void {
