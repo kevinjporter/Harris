@@ -24,11 +24,31 @@ export class ProductService {
         }))
   }
 
+  getProduct(productId: number): Observable<Product> {
+    return this.http.get<Product>(`http://localhost:5157/api/Products/${productId}`)
+      .pipe(
+        catchError(error => {
+          console.error('Problem retrieving product:', error);
+          return throwError(() => new Error('Oops! Something went wrong. Please try again later.'));
+        }))
+
+  }
+
   addProduct(newProduct: Product): Observable<number> {
     return this.http.post<number>('http://localhost:5157/api/Products', newProduct)
       .pipe(
         catchError(error => {
           console.error('Problem adding product:', error);
+          return throwError(() => new Error('Oops! Something went wrong. Please try again later.'));
+        }))
+  }
+
+  updateProduct(updatedProduct: Product) {
+    console.log("in product service update about to call endpoint");
+    return this.http.put('http://localhost:5157/api/Products', updatedProduct)
+      .pipe(
+        catchError(error => {
+          console.error('Problem updating product:', error);
           return throwError(() => new Error('Oops! Something went wrong. Please try again later.'));
         }))
   }

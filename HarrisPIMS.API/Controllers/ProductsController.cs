@@ -16,6 +16,17 @@ public class ProductsController : ControllerBase
     }
 
     [HttpGet]
+    [Route("{productId}")]
+    public IActionResult GetProduct(int productId)
+    {
+        if (productId <= 0) return BadRequest($"Product id '{productId} for GetProduct request is invalid");
+
+        var products = _dbContext.Products.FromSql($"EXEC [dbo].[PIMS_Product_Get] @ProductId={productId}");
+        var product = products.AsEnumerable().Single();
+        return Ok(product);
+    }
+
+    [HttpGet]
     public IActionResult GetAllProducts()
     {
         var productsList = _dbContext.Products.FromSql($"EXEC [dbo].[PIMS_Product_GetList]").ToList();
@@ -30,18 +41,19 @@ public class ProductsController : ControllerBase
     }
 
     [HttpPut]
-    public IActionResult UpdateProduct(int productId, string productName, decimal price, int quantity)
+    public IActionResult UpdateProduct(Product product)
     {
-        var numberOfRowsAffected = _dbContext.Database.SqlQuery<int>($"EXEC [dbo].[PIMS_Product_Update] @ProductID={productId}, @ProductName={productName}, @Price={price}, @Quantity={quantity}");
+        _dbContext.Database.ExecuteSql($"EXEC [dbo].[PIMS_Product_Update] @ProductID={product.ProductId}, @ProductName={product.ProductName}, @Price={product.Price}, @Quantity={product.Quantity}");
         return Ok();
     }
 
     [HttpDelete]
     public IActionResult DeleteProduct(int productId)
     {
+        if (productId <= 0) return BadRequest($"Product id '{productId} for DeleteProduct request is invalid");
+
         var result = _dbContext.Database.SqlQuery<int>($"EXEC [dbo].[PIMS_Product_Delete] @ProductID={productId}");
-        var productDeleted = result.AsEnumerable().Single() == 1;
-        
+        var productDeleted = result.AsEnumerable().Single() == 1;        
         return Ok(productDeleted);
     }
 }

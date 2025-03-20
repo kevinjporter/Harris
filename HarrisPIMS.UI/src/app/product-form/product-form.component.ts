@@ -1,6 +1,5 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, FormGroup } from '@angular/forms';
 import { Product } from '../../models/product';
 import { ProductService } from '../services/productService';
 
@@ -14,13 +13,16 @@ import { ProductService } from '../services/productService';
 
 export class ProductFormComponent implements OnInit {
   productForm!: FormGroup;
-  newProduct: Product = {
-      productName: '',
+  productDetails: Product;
+
+  constructor(private formBuilder: FormBuilder, private productService: ProductService) {
+    this.productDetails = {
+      productId: 0,
+      productName: "",
       price: 0,
       quantity: 0
-  };
-
-  constructor(private formBuilder: FormBuilder, private productService: ProductService) { }
+    };
+  }
 
   ngOnInit() {
     this.productForm = this.formBuilder.group({
@@ -31,13 +33,13 @@ export class ProductFormComponent implements OnInit {
   }
 
   onSubmit(form: FormGroup) {
-    this.newProduct = {
+    this.productDetails = {
       productName: form.value.productName,
       price: form.value.price,
       quantity: form.value.quantity
     };
 
-    this.productService.addProduct(this.newProduct).subscribe(response =>
+    this.productService.addProduct(this.productDetails).subscribe(response =>
       this.productForm.reset());
   }
 }

@@ -10,6 +10,7 @@ import { ProductService } from '../services/productService';
 import { Observable } from 'rxjs/internal/Observable';
 import { switchMap } from 'rxjs/internal/operators/switchMap';
 import { AsyncPipe } from '@angular/common';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-view-products',
@@ -31,7 +32,7 @@ export class ViewProductsComponent {
   readonly columnsToDisplay = ['productName', 'price', 'quantity', 'actions'];
   readonly dialog = inject(MatDialog);
 
-  constructor(private productService: ProductService) { }
+  constructor(private productService: ProductService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.products$ = this.productService.refetch.pipe(
@@ -43,5 +44,9 @@ export class ViewProductsComponent {
       data: { productId: selectedProductId, productName: selectedProductName },
       width: '250px'
     });
+  }
+
+  editProduct(selectedProductId: number) {
+    this.router.navigate([`edit-product/${selectedProductId}`]);
   }
 }

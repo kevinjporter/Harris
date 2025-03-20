@@ -21,7 +21,7 @@
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef> </th>
       <td mat-cell *matCellDef="let product">
-        <button mat-icon-button matTooltip="Edit product"><mat-icon>edit</mat-icon></button>
+        <button mat-icon-button matTooltip="Edit product" (click)="editProduct(product.productId)"><mat-icon>edit</mat-icon></button>
         <button mat-icon-button matTooltip="Delete product" (click)="openDialog(product.productId, product.productName);"><mat-icon>delete_forever</mat-icon></button>
       </td>
     </ng-container>
