@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, FormGroup } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Product } from '../../models/product';
 import { ProductService } from '../services/productService';
 import { ActivatedRoute } from '@angular/router';
@@ -16,7 +16,7 @@ export class EditProductComponent {
   productDetails: Product;
   productIdFromUrl: number;
 
-  constructor(private formBuilder: FormBuilder, private productService: ProductService, private route: ActivatedRoute) {
+  constructor(private productService: ProductService, private route: ActivatedRoute) {
     this.productIdFromUrl = 0;
     this.productDetails = {
       productId: 0,
@@ -27,12 +27,6 @@ export class EditProductComponent {
   }
 
   ngOnInit() {
-    // build form
-    this.editProductForm = this.formBuilder.group({
-      productName: [''],
-      price: [''],
-      quantity: ['']
-    });
 
     // read id from url
     this.route.params.subscribe(params => {
@@ -40,10 +34,11 @@ export class EditProductComponent {
     });
 
     this.productService.getProduct(this.productIdFromUrl).subscribe(p => {
-      this.editProductForm = this.formBuilder.group({
-        productName: [p.productName],
-        price: [p.price],
-        quantity: [p.quantity]
+      // build form
+      this.editProductForm = new FormGroup({
+        productName: new FormControl(p.productName, Validators.required),
+        price: new FormControl(p.price, Validators.required),
+        quantity: new FormControl(p.quantity, Validators.required)
       });
     });
   }

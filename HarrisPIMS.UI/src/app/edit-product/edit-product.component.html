@@ -6,7 +6,7 @@
       <label>Product Name:</label>
     </div>
     <div>
-      <input formControlName="productName" type="text">
+      <input formControlName="productName" type="text" required>
     </div>
   </div>
 
@@ -15,7 +15,7 @@
       <label>Price:</label>
     </div>
     <div>
-      <input formControlName="price" type="number">
+      <input formControlName="price" type="number" required>
     </div>
   </div>
 
@@ -24,11 +24,11 @@
       <label>Quantity:</label>
     </div>
     <div>
-      <input formControlName="quantity" type="number">
+      <input formControlName="quantity" type="number" required>
     </div>
   </div>
 
   <div class="buttonRow">
-    <button type="submit">Update Product</button>
+    <button type="submit" [disabled]="!editProductForm.valid">Update Product</button>
   </div>
 </form>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, FormGroup } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Product } from '../../models/product';
 import { ProductService } from '../services/productService';
 
@@ -15,7 +15,7 @@ export class ProductFormComponent implements OnInit {
   productForm!: FormGroup;
   productDetails: Product;
 
-  constructor(private formBuilder: FormBuilder, private productService: ProductService) {
+  constructor(private productService: ProductService) {
     this.productDetails = {
       productId: 0,
       productName: "",
@@ -25,10 +25,10 @@ export class ProductFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.productForm = this.formBuilder.group({
-      productName: [''],
-      price: [''],
-      quantity: ['']
+    this.productForm = new FormGroup({
+      productName: new FormControl('', Validators.required),
+      price: new FormControl('', Validators.required),
+      quantity: new FormControl('', Validators.required)
     });
   }
 
