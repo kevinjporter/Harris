@@ -24,6 +24,15 @@ export class ProductService {
         }))
   }
 
+  addProduct(newProduct: Product): Observable<number> {
+    return this.http.post<number>('http://localhost:5157/api/Products', newProduct)
+      .pipe(
+        catchError(error => {
+          console.error('Problem adding product:', error);
+          return throwError(() => new Error('Oops! Something went wrong. Please try again later.'));
+        }))
+  }
+
   deleteProduct(productId: number) {
     return this.http.delete(`http://localhost:5157/api/Products?productId=${productId}`)
       .pipe(tap(() => this.refetchProducts.next(null)))

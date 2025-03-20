@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, FormGroup, Validators } from '@angular/forms';
 import { Product } from '../../models/product';
+import { ProductService } from '../services/productService';
 
 @Component({
   selector: 'app-product-form',
@@ -19,7 +20,7 @@ export class ProductFormComponent implements OnInit {
       quantity: 0
   };
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient) { }
+  constructor(private formBuilder: FormBuilder, private productService: ProductService) { }
 
   ngOnInit() {
     this.productForm = this.formBuilder.group({
@@ -36,7 +37,7 @@ export class ProductFormComponent implements OnInit {
       quantity: form.value.quantity
     };
 
-    this.http.post('http://localhost:5157/api/Products', this.newProduct).subscribe(response =>
+    this.productService.addProduct(this.newProduct).subscribe(response =>
       this.productForm.reset());
   }
 }
